@@ -6,8 +6,11 @@ import br.com.lukinhasssss.forum.model.Topico;
 import br.com.lukinhasssss.forum.repositories.CursoRepository;
 import br.com.lukinhasssss.forum.repositories.TopicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController // Por padrão assume que all método terá o @ResponseBody
@@ -32,9 +35,13 @@ public class TopicosController {
     }
 
     @PostMapping
-    public void cadastrar(@RequestBody TopicoForm form) { // @RequestBody pois os dados vem do corpo da requisição
+    public ResponseEntity<TopicoDto> cadastrar(@RequestBody TopicoForm form, UriComponentsBuilder uriBuilder) { // @RequestBody pois os dados vem do corpo da requisição
         Topico topico = form.converter(cursoRepository);
         topicoRepository.save(topico);
+
+        URI uri = uriBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(new TopicoDto(topico));
     }
 
 }
