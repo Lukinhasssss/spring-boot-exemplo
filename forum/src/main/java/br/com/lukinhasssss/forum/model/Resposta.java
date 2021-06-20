@@ -19,6 +19,8 @@ public class Resposta {
 	private Usuario autor;
 	private Boolean solucao = false;
 
+	public Resposta() {}
+
 	public Long getId() {
 		return id;
 	}
