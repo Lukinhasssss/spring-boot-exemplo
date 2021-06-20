@@ -1,11 +1,15 @@
-package br.com.lukinhasssss.forum.models;
+package br.com.lukinhasssss.forum.model;
 
-public class Usuario {
+public class Curso {
 
 	private Long id;
 	private String nome;
-	private String email;
-	private String senha;
+	private String categoria;
+
+	public Curso(String nome, String categoria) {
+		this.nome = nome;
+		this.categoria = categoria;
+	}
 
 	public Long getId() {
 		return id;
@@ -23,20 +27,12 @@ public class Usuario {
 		this.nome = nome;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getCategoria() {
+		return categoria;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
 	}
 
 	@Override
@@ -55,7 +51,7 @@ public class Usuario {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Usuario other = (Usuario) obj;
+		Curso other = (Curso) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

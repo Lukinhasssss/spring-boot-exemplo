@@ -1,4 +1,4 @@
-package br.com.lukinhasssss.forum.models;
+package br.com.lukinhasssss.forum.model;
 
 import java.time.LocalDateTime;
 

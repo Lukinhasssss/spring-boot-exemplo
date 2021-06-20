@@ -1,4 +1,4 @@
-package br.com.lukinhasssss.forum.controllers;
+package br.com.lukinhasssss.forum.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
