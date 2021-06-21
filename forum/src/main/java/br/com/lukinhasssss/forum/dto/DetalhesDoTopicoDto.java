@@ -34,27 +34,56 @@ public class DetalhesDoTopicoDto {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getTitulo() {
         return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public String getMensagem() {
         return mensagem;
     }
 
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
+    }
+
     public LocalDateTime getDataCriacao() {
         return dataCriacao;
+    }
+
+    public void setDataCriacao(LocalDateTime dataCriacao) {
+        this.dataCriacao = dataCriacao;
     }
 
     public String getNomeAutor() {
         return nomeAutor;
     }
 
+    public void setNomeAutor(String nomeAutor) {
+        this.nomeAutor = nomeAutor;
+    }
+
     public StatusTopico getStatus() {
         return status;
+    }
+
+    public void setStatus(StatusTopico status) {
+        this.status = status;
     }
 
     public List<RespostaDto> getRespostas() {
         return respostas;
     }
+
+    public void setRespostas(List<RespostaDto> respostas) {
+        this.respostas = respostas;
+    }
+
 }

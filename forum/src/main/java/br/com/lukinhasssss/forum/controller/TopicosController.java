@@ -1,5 +1,6 @@
 package br.com.lukinhasssss.forum.controller;
 
+import br.com.lukinhasssss.forum.controller.form.AtualizacaoTopicoForm;
 import br.com.lukinhasssss.forum.controller.form.TopicoForm;
 import br.com.lukinhasssss.forum.dto.DetalhesDoTopicoDto;
 import br.com.lukinhasssss.forum.dto.TopicoDto;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
@@ -50,6 +52,13 @@ public class TopicosController {
     public DetalhesDoTopicoDto detalhar(@PathVariable Long id) {
         Topico topico = topicoRepository.getById(id);
         return new DetalhesDoTopicoDto(topico);
+    }
+
+    @PutMapping("/{id}")
+    @Transactional // Para avisar para o Spring que é para commitar a transação no final deste método
+    public ResponseEntity<TopicoDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoTopicoForm form) {
+        Topico topico = form.atualizar(id, topicoRepository);
+        return ResponseEntity.ok(new TopicoDto(topico));
     }
 
 }
