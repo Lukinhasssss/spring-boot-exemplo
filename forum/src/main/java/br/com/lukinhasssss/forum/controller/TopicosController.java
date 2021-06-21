@@ -1,6 +1,7 @@
 package br.com.lukinhasssss.forum.controller;
 
 import br.com.lukinhasssss.forum.controller.form.TopicoForm;
+import br.com.lukinhasssss.forum.dto.DetalhesDoTopicoDto;
 import br.com.lukinhasssss.forum.dto.TopicoDto;
 import br.com.lukinhasssss.forum.model.Topico;
 import br.com.lukinhasssss.forum.repositories.CursoRepository;
@@ -43,6 +44,12 @@ public class TopicosController {
         URI uri = uriBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
 
         return ResponseEntity.created(uri).body(new TopicoDto(topico));
+    }
+
+    @GetMapping("/{id}")
+    public DetalhesDoTopicoDto detalhar(@PathVariable Long id) {
+        Topico topico = topicoRepository.getById(id);
+        return new DetalhesDoTopicoDto(topico);
     }
 
 }
