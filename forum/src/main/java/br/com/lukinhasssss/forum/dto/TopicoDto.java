@@ -1,6 +1,7 @@
 package br.com.lukinhasssss.forum.dto;
 
 import br.com.lukinhasssss.forum.model.Topico;
+import org.springframework.data.domain.Page;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -36,9 +37,10 @@ public class TopicoDto {
         return dataCriacao;
     }
 
-    public static List<TopicoDto> converter(List<Topico> topicos) {
+    public static Page<TopicoDto> converter(Page<Topico> topicos) {
 //        return topicos.stream().map(topico -> new TopicoDto(topico)).collect(Collectors.toList());
-        return topicos.stream().map(TopicoDto::new).collect(Collectors.toList());
+//        return topicos.map(topico -> new TopicoDto(topico));
+        return topicos.map(TopicoDto::new);
     }
 
 }
