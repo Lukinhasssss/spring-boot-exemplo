@@ -1,6 +1,7 @@
 package br.com.lukinhasssss.forum.config.security;
 
 import br.com.lukinhasssss.forum.model.Usuario;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,5 +41,10 @@ public class TokenService {
         catch (Exception e) {
             return false;
         }
+    }
+
+    public Long getIdUsuario(String token) {
+        Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+        return Long.parseLong(claims.getSubject()); // Para recuperar o Id do usuário que está setado dentro do token
     }
 }
