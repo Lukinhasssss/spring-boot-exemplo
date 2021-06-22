@@ -1,4 +1,4 @@
-package br.com.lukinhasssss.forum.config.securiry;
+package br.com.lukinhasssss.forum.config.security;
 
 import br.com.lukinhasssss.forum.model.Usuario;
 import br.com.lukinhasssss.forum.repositories.UsuarioRepository;
