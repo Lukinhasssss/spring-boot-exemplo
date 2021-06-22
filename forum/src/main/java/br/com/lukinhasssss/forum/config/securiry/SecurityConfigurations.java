@@ -1,5 +1,6 @@
 package br.com.lukinhasssss.forum.config.securiry;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -7,15 +8,19 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @EnableWebSecurity
 @Configuration
 public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private AutenticacaoService autenticacaoService;
+
     // Serve para configurar a parte de autenticação
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
+        auth.userDetailsService(autenticacaoService).passwordEncoder(new BCryptPasswordEncoder()); // Este método serve para dizer para o Spring qual é a classe (service) que tem a lógica de autenticação
     }
 
     // Serve para fazer configurações de autorização
@@ -31,6 +36,6 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
     // Serve para fazer configurações de recursos estáticos (js, css, imagens, etc.)
     @Override
     public void configure(WebSecurity web) throws Exception {
-
     }
+
 }
