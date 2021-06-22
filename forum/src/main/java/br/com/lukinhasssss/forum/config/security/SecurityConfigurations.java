@@ -47,6 +47,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
         .antMatchers(HttpMethod.GET, "/topicos").permitAll()
         .antMatchers(HttpMethod.GET, "/topicos/*").permitAll()
         .antMatchers(HttpMethod.POST, "/auth").permitAll()
+        .antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
         .anyRequest().authenticated()
         .and().csrf().disable()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Indica para o jwt que não é para criar sessão
@@ -56,6 +57,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
     // Serve para fazer configurações de recursos estáticos (js, css, imagens, etc.)
     @Override
     public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/**.html", "/v2/api-docs", "/webjars/**", "/configuration/**", "/swagger-resources/**");
     }
 
 }
