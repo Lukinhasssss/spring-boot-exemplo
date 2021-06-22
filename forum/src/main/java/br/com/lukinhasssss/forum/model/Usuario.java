@@ -1,12 +1,15 @@
 package br.com.lukinhasssss.forum.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
-public class Usuario {
+public class Usuario implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,6 +17,9 @@ public class Usuario {
 	private String nome;
 	private String email;
 	private String senha;
+
+	@ManyToMany(fetch = FetchType.EAGER) // Relacionamentos to many por padrão são do tipo Lazy e não carregam o outro lado do relacionamento
+	private List<Perfil> perfis = new ArrayList<>();
 
 	public Usuario() {}
 
@@ -74,4 +80,38 @@ public class Usuario {
 		return true;
 	}
 
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return this.perfis;
+	}
+
+	@Override
+	public String getPassword() { // É preciso devolver o atributo que representa a senha
+		return senha;
+	}
+
+	@Override
+	public String getUsername() { // É preciso devolver o atributo que representa o email
+		return email;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 }
